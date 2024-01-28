@@ -62,12 +62,12 @@
   box-sizing: border-box;
 }
 
-/* Prevent font size inflation */
+/* Prevent font size inflation
 html {
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
-}
+} */
 
 /* Remove default margin in favour of better control in authored CSS */
 * {
@@ -115,7 +115,7 @@ h4 {
 
 /* A elements that don't have a class get default styles */
 a:not([class]) {
-  text-decoration-skip-ink: auto;
+  /* text-decoration-skip-ink: auto; */
   color: currentColor;
 }
 
@@ -144,6 +144,15 @@ body {
   color: var(--clr-primary-400);
 }
 
+/* paragraph styling? */
+p:not([class]) {
+  opacity: 0.65;
+  max-width: 32ch;
+}
+
+p[data-width="wide"] {
+  max-width: 41ch;
+}
 /* button styling */
 .button {
   cursor: pointer;
@@ -209,18 +218,6 @@ body {
 .nav-list a:focus {
   color: var(--clr-accent-400);
   text-decoration: none;
-}
-
-/* for larger screens */
-@media (min-width: 50em) {
-  .even-columns {
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-  }
-
-  .display-md-inline-flex {
-    display: inline-flex;
-  }
 }
 
 /* for smaller screens */
@@ -289,6 +286,35 @@ body {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+.container {
+  --max-width: 1110px;
+  --padding: 1rem;
+
+  width: min(var(--max-width), 100% - (var(--padding) * 2));
+  margin-inline: auto;
+}
+
+:where(.flow > :not(:first-child)) {
+  margin-top: var(--flow-spacer, 3em);
+}
+
+.even-columns {
+  display: grid;
+  gap: 1rem;
+}
+
+/* for larger screens */
+@media (min-width: 50em) {
+  .even-columns {
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+  }
+
+  .display-md-inline-flex {
+    display: inline-flex;
+  }
 }
 
 .text-primary-400 {
@@ -360,19 +386,6 @@ body {
 }
 .padding-block-700 {
   padding-block: var(--size-700);
-}
-
-.container {
-  --max-width: 1110px;
-  --padding: 1rem;
-
-  width: min(var(--max-width), 100% - (var(--padding) * 2));
-  margin-inline: auto;
-}
-
-.even-columns {
-  display: grid;
-  gap: 1rem;
 }
 
 /* Attribution */
